@@ -1,0 +1,300 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 920" font-family="'Segoe UI', Arial, sans-serif" font-size="12">
+  <defs>
+    <style>
+      .table-header { fill: #2d3748; }
+      .table-header-text { fill: #fff; font-weight: 600; font-size: 13px; }
+      .table-body { fill: #f7fafc; }
+      .table-border { fill: none; stroke: #cbd5e0; stroke-width: 1.5; }
+      .pk { fill: #e53e3e; font-weight: 700; font-size: 10px; }
+      .fk { fill: #3182ce; font-weight: 700; font-size: 10px; }
+      .col-name { fill: #2d3748; }
+      .col-type { fill: #718096; font-size: 11px; }
+      .col-nullable { fill: #a0aec0; font-style: italic; font-size: 10px; }
+      .relation { fill: none; stroke: #3182ce; stroke-width: 1.5; }
+      .relation-self { fill: none; stroke: #805ad5; stroke-width: 1.5; }
+      .relation-dot { fill: #3182ce; }
+      .relation-dot-self { fill: #805ad5; }
+      .title { fill: #1a202c; font-size: 20px; font-weight: 700; }
+      .subtitle { fill: #718096; font-size: 13px; }
+      .meta-header { fill: #4a5568; }
+      .separator { stroke: #e2e8f0; stroke-width: 1; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#3182ce" />
+    </marker>
+    <marker id="arrow-self" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#805ad5" />
+    </marker>
+    <marker id="many" markerWidth="12" markerHeight="10" refX="0" refY="5" orient="auto">
+      <path d="M0,5 L10,0 M0,5 L10,10 M0,5 L10,5" stroke="#3182ce" stroke-width="1.5" fill="none" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="600" y="35" text-anchor="middle" class="title">Malvern Zetasizer .zmes Database Schema</text>
+  <text x="600" y="55" text-anchor="middle" class="subtitle">SQLite 3 — Entity Framework Core — ZS XPLORER Software</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- RecordParameterTypes (center-top, hub table) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <g transform="translate(460, 80)">
+    <rect width="280" height="188" rx="6" class="table-border" />
+    <rect width="280" height="30" rx="6" class="table-header" />
+    <rect x="0" y="24" width="280" height="6" class="table-header" />
+    <text x="140" y="20" text-anchor="middle" class="table-header-text">RecordParameterTypes</text>
+    <rect x="1" y="30" width="278" height="157" rx="0" class="table-body" />
+    <rect x="0" y="262" width="280" height="6" rx="6" class="table-body" />
+    <!-- Columns -->
+    <text x="12" y="48" class="pk">PK</text> <text x="34" y="48" class="col-name">Id</text> <text x="220" y="48" class="col-type">INTEGER</text>
+    <line x1="8" y1="55" x2="272" y2="55" class="separator" />
+    <text x="34" y="70" class="col-name">Guid</text> <text x="220" y="70" class="col-type">TEXT</text> <text x="270" y="70" class="col-nullable" text-anchor="end">UQ</text>
+    <line x1="8" y1="77" x2="272" y2="77" class="separator" />
+    <text x="34" y="92" class="col-name">UniformResourceName</text> <text x="220" y="92" class="col-type">TEXT</text>
+    <line x1="8" y1="99" x2="272" y2="99" class="separator" />
+    <text x="34" y="114" class="col-name">FriendlyName</text> <text x="220" y="114" class="col-type">TEXT</text>
+    <line x1="8" y1="121" x2="272" y2="121" class="separator" />
+    <text x="34" y="136" class="col-name">ParameterDataType</text> <text x="220" y="136" class="col-type">INTEGER</text>
+    <line x1="8" y1="143" x2="272" y2="143" class="separator" />
+    <text x="34" y="158" class="col-name">Description</text> <text x="220" y="158" class="col-type">TEXT</text>
+    <line x1="8" y1="165" x2="272" y2="165" class="separator" />
+    <text x="34" y="180" class="col-name">DataUnitsUrn</text> <text x="220" y="180" class="col-type">TEXT</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- RecordParameterTreeNodes (center) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <g transform="translate(430, 340)">
+    <rect width="340" height="168" rx="6" class="table-border" />
+    <rect width="340" height="30" rx="6" class="table-header" />
+    <rect x="0" y="24" width="340" height="6" class="table-header" />
+    <text x="170" y="20" text-anchor="middle" class="table-header-text">RecordParameterTreeNodes</text>
+    <rect x="1" y="30" width="338" height="137" rx="0" class="table-body" />
+    <rect x="0" y="162" width="340" height="6" rx="6" class="table-body" />
+    <!-- Columns -->
+    <text x="12" y="48" class="pk">PK</text> <text x="34" y="48" class="col-name">Id</text> <text x="270" y="48" class="col-type">INTEGER</text>
+    <line x1="8" y1="55" x2="332" y2="55" class="separator" />
+    <text x="12" y="70" class="fk">FK</text> <text x="34" y="70" class="col-name">ParameterTypeId</text> <text x="270" y="70" class="col-type">INTEGER</text>
+    <line x1="8" y1="77" x2="332" y2="77" class="separator" />
+    <text x="12" y="92" class="fk">FK</text> <text x="34" y="92" class="col-name">ParentNodeId</text> <text x="270" y="92" class="col-type">INTEGER</text> <text x="330" y="92" class="col-nullable" text-anchor="end">null</text>
+    <line x1="8" y1="99" x2="332" y2="99" class="separator" />
+    <text x="12" y="114" class="fk">FK</text> <text x="34" y="114" class="col-name">RootParameterTypeId</text> <text x="270" y="114" class="col-type">INTEGER</text>
+    <line x1="8" y1="121" x2="332" y2="121" class="separator" />
+    <text x="34" y="136" class="col-name">ParameterPath</text> <text x="270" y="136" class="col-type">TEXT</text>
+    <line x1="8" y1="143" x2="332" y2="143" class="separator" />
+    <text x="34" y="158" class="col-name">SiblingIndex</text> <text x="270" y="158" class="col-type">INTEGER</text>
+  </g>
+
+  <!-- Self-referencing arrow for ParentNodeId -->
+  <path d="M 770,432 L 800,432 L 800,388 L 770,388" class="relation-self" marker-end="url(#arrow-self)" />
+  <circle cx="770" cy="432" r="3" class="relation-dot-self" />
+  <text x="808" y="414" font-size="10" fill="#805ad5" font-style="italic">self</text>
+
+  <!-- FK: TreeNodes.ParameterTypeId → ParameterTypes.Id -->
+  <path d="M 600,340 L 600,268" class="relation" marker-end="url(#arrow)" />
+  <circle cx="600" cy="340" r="3" class="relation-dot" />
+
+  <!-- FK: TreeNodes.RootParameterTypeId → ParameterTypes.Id -->
+  <path d="M 660,340 L 660,300 L 700,300 L 700,268" class="relation" marker-end="url(#arrow)" />
+  <circle cx="660" cy="340" r="3" class="relation-dot" />
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- RecordParameterData (center-bottom) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <g transform="translate(400, 590)">
+    <rect width="400" height="310" rx="6" class="table-border" />
+    <rect width="400" height="30" rx="6" class="table-header" />
+    <rect x="0" y="24" width="400" height="6" class="table-header" />
+    <text x="200" y="20" text-anchor="middle" class="table-header-text">RecordParameterData</text>
+    <rect x="1" y="30" width="398" height="279" rx="0" class="table-body" />
+    <rect x="0" y="304" width="400" height="6" rx="6" class="table-body" />
+    <!-- Columns -->
+    <text x="12" y="48" class="pk">PK</text> <text x="34" y="48" class="col-name">Id</text> <text x="320" y="48" class="col-type">INTEGER</text>
+    <line x1="8" y1="55" x2="392" y2="55" class="separator" />
+    <text x="12" y="70" class="fk">FK</text> <text x="34" y="70" class="col-name">RecordId</text> <text x="320" y="70" class="col-type">INTEGER</text>
+    <line x1="8" y1="77" x2="392" y2="77" class="separator" />
+    <text x="12" y="92" class="fk">FK</text> <text x="34" y="92" class="col-name">ParameterTreeNodeId</text> <text x="320" y="92" class="col-type">INTEGER</text>
+    <line x1="8" y1="99" x2="392" y2="99" class="separator" />
+    <text x="12" y="114" class="fk">FK</text> <text x="34" y="114" class="col-name">ParameterTypeId</text> <text x="320" y="114" class="col-type">INTEGER</text>
+    <line x1="8" y1="121" x2="392" y2="121" class="separator" />
+    <text x="34" y="136" class="col-name">Index</text> <text x="320" y="136" class="col-type">INTEGER</text>
+    <line x1="8" y1="143" x2="392" y2="143" class="separator" />
+    <!-- Data columns header -->
+    <text x="200" y="158" text-anchor="middle" fill="#805ad5" font-size="10" font-weight="600">— polymorphic value columns —</text>
+    <line x1="8" y1="165" x2="392" y2="165" class="separator" />
+    <text x="34" y="180" class="col-name">Data_Blob</text> <text x="320" y="180" class="col-type">BLOB</text> <text x="390" y="180" class="col-nullable" text-anchor="end">null</text>
+    <line x1="8" y1="187" x2="392" y2="187" class="separator" />
+    <text x="34" y="202" class="col-name">Data_Boolean</text> <text x="320" y="202" class="col-type">INTEGER</text> <text x="390" y="202" class="col-nullable" text-anchor="end">null</text>
+    <line x1="8" y1="209" x2="392" y2="209" class="separator" />
+    <text x="34" y="224" class="col-name">Data_Double</text> <text x="320" y="224" class="col-type">REAL</text> <text x="390" y="224" class="col-nullable" text-anchor="end">null</text>
+    <line x1="8" y1="231" x2="392" y2="231" class="separator" />
+    <text x="34" y="246" class="col-name">Data_Int32</text> <text x="320" y="246" class="col-type">INTEGER</text> <text x="390" y="246" class="col-nullable" text-anchor="end">null</text>
+    <line x1="8" y1="253" x2="392" y2="253" class="separator" />
+    <text x="34" y="268" class="col-name">Data_Int64</text> <text x="320" y="268" class="col-type">INTEGER</text> <text x="390" y="268" class="col-nullable" text-anchor="end">null</text>
+    <line x1="8" y1="275" x2="392" y2="275" class="separator" />
+    <text x="34" y="290" class="col-name">Data_Single</text> <text x="320" y="290" class="col-type">REAL</text> <text x="390" y="290" class="col-nullable" text-anchor="end">null</text>
+    <line x1="8" y1="297" x2="392" y2="297" class="separator" />
+    <text x="34" y="312" class="col-name">Data_Text</text> <text x="320" y="312" class="col-type">TEXT</text> <text x="390" y="312" class="col-nullable" text-anchor="end">null</text>
+  </g>
+
+  <!-- FK: Data.ParameterTreeNodeId → TreeNodes.Id -->
+  <path d="M 600,590 L 600,508" class="relation" marker-end="url(#arrow)" />
+  <circle cx="600" cy="590" r="3" class="relation-dot" />
+
+  <!-- FK: Data.ParameterTypeId → ParameterTypes.Id -->
+  <path d="M 800,704 L 830,704 L 830,180 L 740,180" class="relation" marker-end="url(#arrow)" />
+  <circle cx="800" cy="704" r="3" class="relation-dot" />
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- StandardRecordGroups (left) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <g transform="translate(30, 80)">
+    <rect width="260" height="146" rx="6" class="table-border" />
+    <rect width="260" height="30" rx="6" class="table-header" />
+    <rect x="0" y="24" width="260" height="6" class="table-header" />
+    <text x="130" y="20" text-anchor="middle" class="table-header-text">StandardRecordGroups</text>
+    <rect x="1" y="30" width="258" height="115" rx="0" class="table-body" />
+    <rect x="0" y="140" width="260" height="6" rx="6" class="table-body" />
+    <!-- Columns -->
+    <text x="12" y="48" class="pk">PK</text> <text x="34" y="48" class="col-name">Id</text> <text x="200" y="48" class="col-type">INTEGER</text>
+    <line x1="8" y1="55" x2="252" y2="55" class="separator" />
+    <text x="34" y="70" class="col-name">Guid</text> <text x="200" y="70" class="col-type">TEXT</text> <text x="250" y="70" class="col-nullable" text-anchor="end">UQ</text>
+    <line x1="8" y1="77" x2="252" y2="77" class="separator" />
+    <text x="34" y="92" class="col-name">GivenName</text> <text x="200" y="92" class="col-type">TEXT</text> <text x="250" y="92" class="col-nullable" text-anchor="end">null</text>
+    <line x1="8" y1="99" x2="252" y2="99" class="separator" />
+    <text x="34" y="114" class="col-name">OriginalLocationUrl</text> <text x="200" y="114" class="col-type">TEXT</text> <text x="250" y="114" class="col-nullable" text-anchor="end">null</text>
+    <line x1="8" y1="121" x2="252" y2="121" class="separator" />
+    <text x="34" y="136" class="col-name">Signature</text> <text x="200" y="136" class="col-type">TEXT</text> <text x="250" y="136" class="col-nullable" text-anchor="end">null</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- StandardRecords (left-center) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <g transform="translate(30, 310)">
+    <rect width="300" height="190" rx="6" class="table-border" />
+    <rect width="300" height="30" rx="6" class="table-header" />
+    <rect x="0" y="24" width="300" height="6" class="table-header" />
+    <text x="150" y="20" text-anchor="middle" class="table-header-text">StandardRecords</text>
+    <rect x="1" y="30" width="298" height="159" rx="0" class="table-body" />
+    <rect x="0" y="184" width="300" height="6" rx="6" class="table-body" />
+    <!-- Columns -->
+    <text x="12" y="48" class="pk">PK</text> <text x="34" y="48" class="col-name">Id</text> <text x="240" y="48" class="col-type">INTEGER</text>
+    <line x1="8" y1="55" x2="292" y2="55" class="separator" />
+    <text x="34" y="70" class="col-name">Guid</text> <text x="240" y="70" class="col-type">TEXT</text> <text x="290" y="70" class="col-nullable" text-anchor="end">UQ</text>
+    <line x1="8" y1="77" x2="292" y2="77" class="separator" />
+    <text x="12" y="92" class="fk">FK</text> <text x="34" y="92" class="col-name">GroupId</text> <text x="240" y="92" class="col-type">INTEGER</text>
+    <line x1="8" y1="99" x2="292" y2="99" class="separator" />
+    <text x="12" y="114" class="fk">FK</text> <text x="34" y="114" class="col-name">RootParameterTypeId</text> <text x="240" y="114" class="col-type">INTEGER</text>
+    <line x1="8" y1="121" x2="292" y2="121" class="separator" />
+    <text x="34" y="136" class="col-name">CreatedDateTime</text> <text x="240" y="136" class="col-type">TEXT</text>
+    <line x1="8" y1="143" x2="292" y2="143" class="separator" />
+    <text x="34" y="158" class="col-name">ModifiedDateTime</text> <text x="240" y="158" class="col-type">TEXT</text>
+    <line x1="8" y1="165" x2="292" y2="165" class="separator" />
+    <text x="34" y="180" class="col-name">Signature</text> <text x="240" y="180" class="col-type">TEXT</text> <text x="290" y="180" class="col-nullable" text-anchor="end">null</text>
+  </g>
+
+  <!-- FK: StandardRecords.GroupId → StandardRecordGroups.Id -->
+  <path d="M 160,310 L 160,226" class="relation" marker-end="url(#arrow)" />
+  <circle cx="160" cy="310" r="3" class="relation-dot" />
+
+  <!-- FK: StandardRecords.RootParameterTypeId → RecordParameterTypes.Id -->
+  <path d="M 330,424 L 380,424 L 380,130 L 460,130" class="relation" marker-end="url(#arrow)" />
+  <circle cx="330" cy="424" r="3" class="relation-dot" />
+
+  <!-- FK: Data.RecordId → StandardRecords.Id -->
+  <path d="M 400,660 L 250,660 L 250,500" class="relation" marker-end="url(#arrow)" />
+  <circle cx="400" cy="660" r="3" class="relation-dot" />
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- RecordAuditTrails (bottom-left) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <g transform="translate(30, 560)">
+    <rect width="260" height="82" rx="6" class="table-border" />
+    <rect width="260" height="30" rx="6" class="table-header" />
+    <rect x="0" y="24" width="260" height="6" class="table-header" />
+    <text x="130" y="20" text-anchor="middle" class="table-header-text">RecordAuditTrails</text>
+    <rect x="1" y="30" width="258" height="51" rx="0" class="table-body" />
+    <rect x="0" y="76" width="260" height="6" rx="6" class="table-body" />
+    <!-- Columns -->
+    <text x="12" y="48" class="pk">PK</text> <text x="30" y="48" class="fk">FK</text> <text x="50" y="48" class="col-name">RecordId</text> <text x="200" y="48" class="col-type">INTEGER</text>
+    <line x1="8" y1="55" x2="252" y2="55" class="separator" />
+    <text x="50" y="70" class="col-name">AuditTrail</text> <text x="200" y="70" class="col-type">TEXT</text>
+  </g>
+
+  <!-- FK: AuditTrails.RecordId → StandardRecords.Id -->
+  <path d="M 160,560 L 160,500" class="relation" marker-end="url(#arrow)" />
+  <circle cx="160" cy="560" r="3" class="relation-dot" />
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- Standalone tables (right side) -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <!-- SchemaMeta -->
+  <g transform="translate(910, 80)">
+    <rect width="240" height="82" rx="6" class="table-border" />
+    <rect width="240" height="30" rx="6" class="meta-header" />
+    <rect x="0" y="24" width="240" height="6" class="meta-header" />
+    <text x="120" y="20" text-anchor="middle" class="table-header-text">SchemaMeta</text>
+    <rect x="1" y="30" width="238" height="51" rx="0" class="table-body" />
+    <rect x="0" y="76" width="240" height="6" rx="6" class="table-body" />
+    <text x="12" y="48" class="pk">PK</text> <text x="34" y="48" class="col-name">Id</text> <text x="180" y="48" class="col-type">INTEGER</text>
+    <line x1="8" y1="55" x2="232" y2="55" class="separator" />
+    <text x="34" y="70" class="col-name">CurrentVersion</text> <text x="180" y="70" class="col-type">INTEGER</text>
+  </g>
+
+  <!-- StoreMetadata -->
+  <g transform="translate(910, 190)">
+    <rect width="240" height="82" rx="6" class="table-border" />
+    <rect width="240" height="30" rx="6" class="meta-header" />
+    <rect x="0" y="24" width="240" height="6" class="meta-header" />
+    <text x="120" y="20" text-anchor="middle" class="table-header-text">StoreMetadata</text>
+    <rect x="1" y="30" width="238" height="51" rx="0" class="table-body" />
+    <rect x="0" y="76" width="240" height="6" rx="6" class="table-body" />
+    <text x="12" y="48" class="pk">PK</text> <text x="34" y="48" class="col-name">Key</text> <text x="180" y="48" class="col-type">TEXT</text>
+    <line x1="8" y1="55" x2="232" y2="55" class="separator" />
+    <text x="34" y="70" class="col-name">Value</text> <text x="180" y="70" class="col-type">TEXT</text> <text x="230" y="70" class="col-nullable" text-anchor="end">null</text>
+  </g>
+
+  <!-- DataLocks -->
+  <g transform="translate(910, 300)">
+    <rect width="240" height="126" rx="6" class="table-border" />
+    <rect width="240" height="30" rx="6" class="meta-header" />
+    <rect x="0" y="24" width="240" height="6" class="meta-header" />
+    <text x="120" y="20" text-anchor="middle" class="table-header-text">DataLocks</text>
+    <rect x="1" y="30" width="238" height="95" rx="0" class="table-body" />
+    <rect x="0" y="120" width="240" height="6" rx="6" class="table-body" />
+    <text x="12" y="48" class="pk">PK</text> <text x="34" y="48" class="col-name">Id</text> <text x="180" y="48" class="col-type">INTEGER</text>
+    <line x1="8" y1="55" x2="232" y2="55" class="separator" />
+    <text x="34" y="70" class="col-name">ClientGuid</text> <text x="180" y="70" class="col-type">TEXT</text>
+    <line x1="8" y1="77" x2="232" y2="77" class="separator" />
+    <text x="34" y="92" class="col-name">LockExpires</text> <text x="180" y="92" class="col-type">TEXT</text>
+    <line x1="8" y1="99" x2="232" y2="99" class="separator" />
+    <text x="34" y="114" class="col-name">LockType</text> <text x="180" y="114" class="col-type">INTEGER</text>
+  </g>
+
+  <!-- __EFMigrationsHistory -->
+  <g transform="translate(910, 455)">
+    <rect width="240" height="82" rx="6" class="table-border" />
+    <rect width="240" height="30" rx="6" class="meta-header" />
+    <rect x="0" y="24" width="240" height="6" class="meta-header" />
+    <text x="120" y="20" text-anchor="middle" class="table-header-text">__EFMigrationsHistory</text>
+    <rect x="1" y="30" width="238" height="51" rx="0" class="table-body" />
+    <rect x="0" y="76" width="240" height="6" rx="6" class="table-body" />
+    <text x="12" y="48" class="pk">PK</text> <text x="34" y="48" class="col-name">MigrationId</text> <text x="180" y="48" class="col-type">TEXT</text>
+    <line x1="8" y1="55" x2="232" y2="55" class="separator" />
+    <text x="34" y="70" class="col-name">ProductVersion</text> <text x="180" y="70" class="col-type">TEXT</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(910, 580)">
+    <rect width="240" height="100" rx="6" fill="#edf2f7" stroke="#cbd5e0" stroke-width="1" />
+    <text x="120" y="20" text-anchor="middle" fill="#2d3748" font-weight="600" font-size="12">Legend</text>
+    <text x="16" y="40" class="pk">PK</text> <text x="36" y="40" fill="#2d3748" font-size="11">Primary Key</text>
+    <text x="16" y="58" class="fk">FK</text> <text x="36" y="58" fill="#2d3748" font-size="11">Foreign Key</text>
+    <text x="16" y="76" fill="#a0aec0" font-size="10" font-style="italic">null</text> <text x="46" y="76" fill="#2d3748" font-size="11">Nullable column</text>
+    <text x="16" y="94" fill="#a0aec0" font-size="10" font-style="italic">UQ</text> <text x="46" y="94" fill="#2d3748" font-size="11">Unique constraint</text>
+    <line x1="130" y1="33" x2="170" y2="33" class="relation" />
+    <text x="178" y="37" fill="#2d3748" font-size="11">FK relationship</text>
+    <line x1="130" y1="51" x2="170" y2="51" class="relation-self" />
+    <text x="178" y="55" fill="#2d3748" font-size="11">Self-reference</text>
+  </g>
+</svg>
