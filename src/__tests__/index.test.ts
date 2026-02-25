@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { openAsBlob } from 'node:fs';
 import { join } from 'node:path';
 
 import { expect, test } from 'vitest';
@@ -13,11 +13,8 @@ const testFilePath = join(import.meta.dirname, 'data/test.zmes');
  * @returns Parsed ZmesFile result
  */
 async function loadTestFile(): Promise<ZmesFile> {
-  const fileBuffer = readFileSync(testFilePath);
-  const arrayBuffer = fileBuffer.buffer.slice(
-    fileBuffer.byteOffset,
-    fileBuffer.byteOffset + fileBuffer.byteLength,
-  );
+  const blob = await openAsBlob(testFilePath);
+  const arrayBuffer = await blob.arrayBuffer();
   return parse(arrayBuffer);
 }
 

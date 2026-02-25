@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises';
+import { openAsBlob } from 'node:fs';
 import { join } from 'node:path';
 
 import type { MeasurementXY } from 'cheminfo-types';
@@ -13,11 +13,8 @@ const testFilePath = join(import.meta.dirname, 'data/test.zmes');
  * @returns Array of MeasurementXY from the test file
  */
 async function loadMeasurements(): Promise<Array<MeasurementXY<Float64Array>>> {
-  const buffer = await readFile(testFilePath);
-  const arrayBuffer = buffer.buffer.slice(
-    buffer.byteOffset,
-    buffer.byteOffset + buffer.byteLength,
-  );
+  const blob = await openAsBlob(testFilePath);
+  const arrayBuffer = await blob.arrayBuffer();
   const zmesFile = await parse(arrayBuffer);
   return toMeasurementXY(zmesFile);
 }
