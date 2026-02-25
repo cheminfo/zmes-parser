@@ -3,8 +3,9 @@ import { join } from 'node:path';
 
 import { expect, test } from 'vitest';
 
-import type { ZmesFile, ZmesParameter } from '../index.ts';
+import { findParameter, findParameterDeep } from '../findParameter.ts';
 import { parse } from '../index.ts';
+import type { ZmesFile, ZmesParameter } from '../types.ts';
 
 const testFilePath = join(import.meta.dirname, 'data/test.zmes');
 
@@ -16,43 +17,6 @@ async function loadTestFile(): Promise<ZmesFile> {
   const blob = await openAsBlob(testFilePath);
   const arrayBuffer = await blob.arrayBuffer();
   return parse(arrayBuffer);
-}
-
-/**
- * Find a parameter by name in a flat list of children.
- * @param children - List of parameters to search
- * @param name - Name to search for
- * @returns The matching parameter, or undefined
- */
-function findParameter(
-  children: ZmesParameter[],
-  name: string,
-): ZmesParameter | undefined {
-  return children.find((child) => child.name === name);
-}
-
-/**
- * Recursively search for a parameter by name in the tree.
- * @param parameter - Root parameter to search from
- * @param name - Name to search for
- * @returns The matching parameter, or undefined
- */
-function findParameterDeep(
-  parameter: ZmesParameter,
-  name: string,
-): ZmesParameter | undefined {
-  if (parameter.name === name) {
-    return parameter;
-  }
-  if (parameter.children) {
-    for (const child of parameter.children) {
-      const found = findParameterDeep(child, name);
-      if (found) {
-        return found;
-      }
-    }
-  }
-  return undefined;
 }
 
 test('parse test.zmes file', async () => {

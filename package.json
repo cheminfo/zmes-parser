@@ -36,8 +36,7 @@
     "tsc-build": "tsc --project tsconfig.build.json"
   },
   "dependencies": {
-    "@sqlite.org/sqlite-wasm": "^3.51.2-build6",
-    "cheminfo-types": "^1.10.0"
+    "@sqlite.org/sqlite-wasm": "^3.51.2-build6"
   },
   "devDependencies": {
     "@types/node": "^25.3.0",
