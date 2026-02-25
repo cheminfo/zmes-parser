@@ -2,8 +2,16 @@
   "name": "zmes-parser",
   "version": "0.0.0",
   "license": "MIT",
-  "description": "",
-  "keywords": [],
+  "description": "Parse Malvern Panalytical Zetasizer .zmes files (ZS XPLORER DLS measurements)",
+  "keywords": [
+    "zmes",
+    "malvern",
+    "zetasizer",
+    "DLS",
+    "dynamic-light-scattering",
+    "particle-size",
+    "parser"
+  ],
   "author": "Luc Patiny",
   "type": "module",
   "exports": {
