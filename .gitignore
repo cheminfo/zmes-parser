@@ -118,3 +118,6 @@ dist
 .DS_Store
 
 lib
+
+# Auto-generated wasm embedding
+src/sqlite3WasmGzBase64.ts
