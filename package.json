@@ -27,10 +27,11 @@
     "eslint": "eslint .",
     "eslint-fix": "eslint . --fix",
     "generate-wasm": "node scripts/generateWasm.mjs",
-    "prepack": "npm run generate-wasm && npm run tsc",
+    "prepare": "npm run generate-wasm",
+    "prepack": "npm run tsc",
     "prettier": "prettier --check .",
     "prettier-write": "prettier --write .",
-    "test": "npm run generate-wasm && npm run test-only && npm run check-types && npm run eslint && npm run prettier",
+    "test": "npm run test-only && npm run check-types && npm run eslint && npm run prettier",
     "test-only": "vitest run --coverage",
     "tsc": "npm run clean && npm run tsc-build",
     "tsc-build": "tsc --project tsconfig.build.json"
