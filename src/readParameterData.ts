@@ -62,22 +62,25 @@ export function readParameterData(
 
 /**
  * Load all RecordParameterData rows for a record into a Map
- * keyed by ParameterTreeNodeId.
+ * keyed by ParameterTreeNodeId. Each tree node may have multiple
+ * data rows (e.g. when there are multiple peaks), so the map
+ * stores an array of rows per node, ordered by the Index column.
  * @param database - Opened SQLite database handle
  * @param sqlite3 - SQLite3 runtime
  * @param recordId - The record id
- * @returns Map of tree node id to raw data row
+ * @returns Map of tree node id to array of raw data rows
  */
 function loadDataMap(
   database: Database,
   sqlite3: Sqlite3Static,
   recordId: number,
-): Map<number, RawDataRow> {
+): Map<number, RawDataRow[]> {
   const rows = database.selectObjects(
     `
     SELECT
       ParameterTreeNodeId AS parameterTreeNodeId,
       ParameterTypeId     AS parameterTypeId,
+      "Index"             AS dataIndex,
       Data_Boolean        AS dataBoolean,
       Data_Double         AS dataDouble,
       Data_Int32          AS dataInt32,
@@ -86,7 +89,7 @@ function loadDataMap(
       Data_Text           AS dataText
     FROM RecordParameterData
     WHERE RecordId = ?
-    ORDER BY Id
+    ORDER BY "Index"
   `,
     [recordId],
   );
@@ -96,26 +99,48 @@ function loadDataMap(
     `
     SELECT
       ParameterTreeNodeId AS parameterTreeNodeId,
+      "Index"             AS dataIndex,
       Data_Blob           AS dataBlob
     FROM RecordParameterData
     WHERE RecordId = ? AND Data_Blob IS NOT NULL
+    ORDER BY "Index"
   `,
     [recordId],
   );
 
-  const blobMap = new Map<number, Uint8Array>();
+  const blobMap = new Map<string, Uint8Array>();
   for (const blobRow of blobRows) {
     const nodeId = blobRow.parameterTreeNodeId as number;
-    blobMap.set(nodeId, blobRow.dataBlob as unknown as Uint8Array);
+    const dataIndex = blobRow.dataIndex as number;
+    blobMap.set(
+      `${nodeId}:${dataIndex}`,
+      blobRow.dataBlob as unknown as Uint8Array,
+    );
   }
 
-  const dataMap = new Map<number, RawDataRow>();
+  const dataMap = new Map<number, RawDataRow[]>();
   for (const row of rows) {
-    const raw = row as unknown as Omit<RawDataRow, 'dataBlob'>;
-    dataMap.set(raw.parameterTreeNodeId, {
-      ...raw,
-      dataBlob: blobMap.get(raw.parameterTreeNodeId) ?? null,
-    });
+    const raw = row as unknown as Omit<RawDataRow, 'dataBlob'> & {
+      dataIndex: number;
+    };
+    const entry: RawDataRow = {
+      parameterTreeNodeId: raw.parameterTreeNodeId,
+      parameterTypeId: raw.parameterTypeId,
+      dataBoolean: raw.dataBoolean,
+      dataDouble: raw.dataDouble,
+      dataInt32: raw.dataInt32,
+      dataInt64: raw.dataInt64,
+      dataSingle: raw.dataSingle,
+      dataText: raw.dataText,
+      dataBlob:
+        blobMap.get(`${raw.parameterTreeNodeId}:${raw.dataIndex}`) ?? null,
+    };
+    const existing = dataMap.get(raw.parameterTreeNodeId);
+    if (existing) {
+      existing.push(entry);
+    } else {
+      dataMap.set(raw.parameterTreeNodeId, [entry]);
+    }
   }
 
   return dataMap;
@@ -124,21 +149,30 @@ function loadDataMap(
 /**
  * Recursively convert a TreeNode into a ZmesParameter,
  * extracting the appropriate value from the data map.
+ *
+ * When a tree node has multiple data rows (e.g. multiple peaks),
+ * each row represents a separate instance. The node is duplicated
+ * once per instance, and each child picks the corresponding row
+ * at the same instance index.
  * @param node - The tree node to convert
- * @param dataMap - Map of tree node id to raw data
+ * @param dataMap - Map of tree node id to array of raw data rows
+ * @param instanceIndex - Which instance to use when this node has multiple rows (default: 0)
  * @returns The converted ZmesParameter
  */
 function convertNode(
   node: TreeNode,
-  dataMap: Map<number, RawDataRow>,
+  dataMap: Map<number, RawDataRow[]>,
+  instanceIndex = 0,
 ): ZmesParameter {
   const parameter: ZmesParameter = {
     name: node.parameterType.friendlyName ?? '',
     urn: node.parameterType.urn ?? '',
   };
 
+  const dataRows = dataMap.get(node.id);
+  const dataRow = dataRows?.[instanceIndex];
+
   // Extract value from the data row based on the parameter's data type
-  const dataRow = dataMap.get(node.id);
   if (dataRow) {
     const value = extractValue(node.parameterType.dataType, dataRow);
     if (value !== undefined) {
@@ -148,9 +182,25 @@ function convertNode(
 
   // Recursively convert children
   if (node.children.length > 0) {
+    const currentInstanceCount = dataRows?.length ?? 1;
     parameter.children = [];
+
     for (const child of node.children) {
-      parameter.children.push(convertNode(child, dataMap));
+      const childRows = dataMap.get(child.id);
+      const childInstanceCount = childRows?.length ?? 1;
+
+      if (childInstanceCount > 1 && currentInstanceCount <= 1) {
+        // This child has multiple instances (e.g. multiple peaks)
+        // but the current node does not — expand the child into
+        // one copy per instance, each with its own subtree.
+        for (let i = 0; i < childInstanceCount; i++) {
+          parameter.children.push(convertNode(child, dataMap, i));
+        }
+      } else {
+        // Either single instance, or we're already inside a
+        // multi-instance subtree — propagate the instance index.
+        parameter.children.push(convertNode(child, dataMap, instanceIndex));
+      }
     }
   }
 
