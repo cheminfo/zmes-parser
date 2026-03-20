@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.2.0](https://github.com/cheminfo/zmes-parser/compare/v1.1.1...v1.2.0) (2026-03-20)
+
+
+### Features
+
+* embed sqllite3 wasm as base64 ([e622148](https://github.com/cheminfo/zmes-parser/commit/e622148a0feedfe1ca81d9d892512a0892fe6e80))
+* keep only the parser ([332b53d](https://github.com/cheminfo/zmes-parser/commit/332b53d09d7d07e1b2f7af05884f314a40e01dfe))
+
+
+### Bug Fixes
+
+* handle multiple peaks by reading Index column from RecordParameterData ([1768f65](https://github.com/cheminfo/zmes-parser/commit/1768f658772eabd191a75d732b0bd8cf49f2dd67))
+* sqlite-wasm is a dependency ([e5d8888](https://github.com/cheminfo/zmes-parser/commit/e5d8888610702511fd9f37ea7124303dbf08830d))
+
 ## [1.1.1](https://github.com/cheminfo/zmes-parser/compare/v1.1.0...v1.1.1) (2026-03-20)
 
 
