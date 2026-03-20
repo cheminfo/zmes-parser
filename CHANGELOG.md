@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/cheminfo/zmes-parser/compare/v1.1.0...v1.1.1) (2026-03-20)
+
+
+### Bug Fixes
+
+* handle multiple peaks by reading Index column from RecordParameterData ([1768f65](https://github.com/cheminfo/zmes-parser/commit/1768f658772eabd191a75d732b0bd8cf49f2dd67))
+
 ## [1.1.0](https://github.com/cheminfo/zmes-parser/compare/v1.0.0...v1.1.0) (2026-02-26)
 
 
