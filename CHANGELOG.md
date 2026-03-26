@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/cheminfo/zmes-parser/compare/v1.2.0...v1.3.0) (2026-03-26)
+
+
+### Features
+
+* export findParameter, findParameterDeep and ZmesParameter type ([c668876](https://github.com/cheminfo/zmes-parser/commit/c668876deeaf872072f80ff443b81dac82eac8dc))
+
 ## [1.2.0](https://github.com/cheminfo/zmes-parser/compare/v1.1.1...v1.2.0) (2026-03-20)
 
 
